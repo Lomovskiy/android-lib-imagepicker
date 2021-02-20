@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lomovskiy.lib.template.sample.MainActivity">
+    tools:context="com.lomovskiy.lib.imagepicker.sample.MainActivity">
 
     <Button
         android:id="@+id/button"

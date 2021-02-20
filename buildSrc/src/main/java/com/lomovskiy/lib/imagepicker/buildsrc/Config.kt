@@ -1,4 +1,4 @@
-package com.lomovskiy.lib.template.buildsrc
+package com.lomovskiy.lib.imagepicker.buildsrc
 
 object Config {
 

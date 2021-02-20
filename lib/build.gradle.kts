@@ -1,4 +1,4 @@
-import com.lomovskiy.lib.template.buildsrc.Config
+import com.lomovskiy.lib.imagepicker.buildsrc.Config
 
 plugins {
     id("com.android.library")
@@ -30,7 +30,7 @@ android {
 
 dependencies {
 
-    implementation(Config.Deps.kotlinStd)
+    implementation(com.lomovskiy.lib.imagepicker.buildsrc.Config.Deps.kotlinStd)
 
 }
 
@@ -48,8 +48,8 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                groupId = Config.Publish.groupId
-                artifactId = Config.Publish.artifactId
+                groupId = com.lomovskiy.lib.imagepicker.buildsrc.Config.Publish.groupId
+                artifactId = com.lomovskiy.lib.imagepicker.buildsrc.Config.Publish.artifactId
                 version = Config.Versions.name
             }
         }

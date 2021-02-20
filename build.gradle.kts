@@ -4,8 +4,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath(com.lomovskiy.lib.template.buildsrc.Config.GradlePlugins.kotlin)
-        classpath(com.lomovskiy.lib.template.buildsrc.Config.GradlePlugins.android)
+        classpath(com.lomovskiy.lib.imagepicker.buildsrc.Config.GradlePlugins.kotlin)
+        classpath(com.lomovskiy.lib.imagepicker.buildsrc.Config.GradlePlugins.android)
     }
 }
 

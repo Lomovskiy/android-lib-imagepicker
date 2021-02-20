@@ -1,4 +1,4 @@
-import com.lomovskiy.lib.template.buildsrc.Config
+import com.lomovskiy.lib.imagepicker.buildsrc.Config
 
 plugins {
     id("com.android.application")
@@ -8,7 +8,7 @@ plugins {
 android {
 
     defaultConfig {
-        applicationId("com.lomovskiy.lib.template.sample")
+        applicationId("com.lomovskiy.lib.imagepicker.sample")
         minSdkVersion(Config.Versions.Android.min)
         targetSdkVersion(Config.Versions.Android.target)
         compileSdkVersion(Config.Versions.Android.compile)

@@ -1,3 +1,3 @@
 include(":lib")
 include(":app")
-rootProject.name = "template"
+rootProject.name = "image-picker"

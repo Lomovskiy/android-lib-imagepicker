@@ -1,4 +1,4 @@
-package com.lomovskiy.lib.template.sample
+package com.lomovskiy.lib.imagepicker.sample
 
 import android.os.Bundle
 import android.widget.Button
