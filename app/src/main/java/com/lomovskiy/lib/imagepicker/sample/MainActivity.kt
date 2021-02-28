@@ -8,18 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.lomovskiy.lib.imagepicker.GalleryImagePicker
 import com.lomovskiy.lib.imagepicker.ImagePicker
+import com.lomovskiy.lib.imagepicker.launchForImage
 import java.io.File
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val imagePicker: ImagePicker = GalleryImagePicker()
+    private val imagePicker = GalleryImagePicker()
 
-    private val getFromGalleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent(), imagePicker)
-
-    private val getFromCameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicture()) {
-        contentResolver.delete(uri!!, null)
-    }
+    private val launcher = imagePicker.createLauncher(this)
 
     private lateinit var buttonCamera: Button
     private lateinit var buttonGallery: Button
@@ -38,10 +35,10 @@ class MainActivity : AppCompatActivity() {
                 "${packageName}.imagepicker.fileprovider",
                 file
             )
-            getFromCameraLauncher.launch(uri)
+//            getFromCameraLauncher.launch(uri)
         }
         buttonGallery.setOnClickListener {
-            imagePicker.deliveryTo(getFromGalleryLauncher)
+            launcher.launchForImage()
         }
     }
 
