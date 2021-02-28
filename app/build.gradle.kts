@@ -29,4 +29,5 @@ android {
 dependencies {
     implementation(Config.Deps.kotlinStd)
     implementation(Config.Deps.ui)
+    implementation(project(Config.Modules.lib))
 }

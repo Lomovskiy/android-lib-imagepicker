@@ -31,6 +31,7 @@ android {
 dependencies {
 
     implementation(com.lomovskiy.lib.imagepicker.buildsrc.Config.Deps.kotlinStd)
+    implementation(com.lomovskiy.lib.imagepicker.buildsrc.Config.Deps.ui)
 
 }
 

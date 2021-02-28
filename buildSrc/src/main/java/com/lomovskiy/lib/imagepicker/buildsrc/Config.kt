@@ -32,7 +32,7 @@ object Config {
 
         const val kotlin = "1.4.30"
 
-        const val ui = "1.0.6"
+        const val ui = "1.0.8"
 
     }
 
