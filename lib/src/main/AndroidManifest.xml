@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lomovskiy.lib.imagepicker">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application>
         <provider
             android:name=".ImagePickerFileProvider"
