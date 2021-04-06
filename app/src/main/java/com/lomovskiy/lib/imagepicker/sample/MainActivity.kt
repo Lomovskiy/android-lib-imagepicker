@@ -5,17 +5,11 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
+import com.lomovskiy.lib.imagepicker.PickImageFromCameraContract
 import com.lomovskiy.lib.imagepicker.PickImageFromGalleryContract
 import com.lomovskiy.lib.ui.showToast
 import kotlinx.coroutines.launch
-import java.io.File
-import java.util.*
-
-inline fun ActivityResultLauncher<*>.launch() {
-    launch(null)
-}
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +18,16 @@ class MainActivity : AppCompatActivity() {
 
     private var uri: Uri? = null
 
-    private val launcher = registerForActivityResult(PickImageFromGalleryContract) {
+    private val galleryLauncher = registerForActivityResult(PickImageFromGalleryContract) {
+        lifecycleScope.launch {
+            if (it != null) {
+                val file = AppLoader.imagePicker.handleResult(it)
+                showToast(file.absolutePath)
+            }
+        }
+    }
+
+    private val cameraLauncher = registerForActivityResult(PickImageFromCameraContract) {
         lifecycleScope.launch {
             if (it != null) {
                 val file = AppLoader.imagePicker.handleResult(it)
@@ -39,15 +42,10 @@ class MainActivity : AppCompatActivity() {
         buttonCamera = findViewById(R.id.button_camera)
         buttonGallery = findViewById(R.id.button_gallery)
         buttonCamera.setOnClickListener {
-            val file = File("${cacheDir.path}${File.separator}${UUID.randomUUID()}.jpg${File.separator}")
-            uri = FileProvider.getUriForFile(
-                this,
-                "${packageName}.imagepicker.fileprovider",
-                file
-            )
+            cameraLauncher.launch(AppLoader.imagePicker.getNewPhotoUri())
         }
         buttonGallery.setOnClickListener {
-            launcher.launch()
+            galleryLauncher.launch(null)
         }
     }
 

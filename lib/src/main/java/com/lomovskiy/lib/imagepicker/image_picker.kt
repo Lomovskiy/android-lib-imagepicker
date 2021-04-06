@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import io.reactivex.Completable
 import io.reactivex.Maybe
@@ -18,6 +19,8 @@ interface ImagePicker {
 
     suspend fun handleResult(imageUri: Uri): File
 
+    fun getNewPhotoUri(): Uri
+
 }
 
 class ImagePickerImpl(
@@ -25,6 +28,8 @@ class ImagePickerImpl(
     private val destinationPath: String,
     private val compressor: ImageCompressor?
 ) : ImagePicker {
+
+    private val authority: String = "${context.packageName}.imagepicker.fileprovider"
 
     override fun handleResultSingle(imageUri: Uri): Single<File> {
         return Single.fromCallable {
@@ -53,6 +58,10 @@ class ImagePickerImpl(
         tmpFile.delete()
         context.cacheDir.deleteRecursively()
         return photoFile
+    }
+
+    override fun getNewPhotoUri(): Uri {
+        return FileProvider.getUriForFile(context, authority, getNewTempFile())
     }
 
     private fun getNewTempFile(): File {

@@ -17,7 +17,7 @@ class AppLoader : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        imageCompressor = ImageCompressorImpl(this, 720, 1280, 1 * 1024)
+        imageCompressor = ImageCompressorImpl(this, 1600, 1200, 7 * 1024)
         imagePicker = ImagePickerImpl(this, filesDir.path, imageCompressor)
     }
 

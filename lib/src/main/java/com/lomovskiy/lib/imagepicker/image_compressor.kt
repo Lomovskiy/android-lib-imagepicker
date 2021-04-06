@@ -1,7 +1,6 @@
 package com.lomovskiy.lib.imagepicker
 
 import android.content.Context
-import android.graphics.Bitmap
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.*
 import io.reactivex.Completable
@@ -27,10 +26,8 @@ class ImageCompressorImpl(
         source: File, dest: File
     ) {
         Compressor.compress(context, source) {
-            resolution(width, height)
-            format(Bitmap.CompressFormat.JPEG)
+            default(width, height, quality = 100)
             size(size)
-            quality(100)
             destination(dest)
         }
     }
