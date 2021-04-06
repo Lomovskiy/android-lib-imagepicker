@@ -1,10 +1,11 @@
 package com.lomovskiy.lib.imagepicker
 
-import android.net.Uri
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import java.io.File
 
-interface ImagePicker : ActivityResultCallback<Uri> {
+
+interface ImagePicker {
 
     enum class Type {
         GALLERY,
@@ -14,10 +15,14 @@ interface ImagePicker : ActivityResultCallback<Uri> {
 
     interface ResultTarget {
 
-        fun onImageSourceResult(type: Type, result: Result<Uri>)
+        fun onImageSourceResult(type: Type, result: File)
 
     }
 
-    fun deliveryTo(launcher: ActivityResultLauncher<String>)
+    fun pick(type: Type, fragment: Fragment, target: ResultTarget) {
+        fragment.registerForActivityResult(ActivityResultContracts.GetContent()) {
+
+        }
+    }
 
 }

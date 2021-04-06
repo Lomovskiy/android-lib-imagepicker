@@ -30,8 +30,11 @@ android {
 
 dependencies {
 
-    implementation(com.lomovskiy.lib.imagepicker.buildsrc.Config.Deps.kotlinStd)
-    implementation(com.lomovskiy.lib.imagepicker.buildsrc.Config.Deps.ui)
+    implementation(Config.Deps.kotlinStd)
+    implementation(Config.Deps.ui)
+    implementation(Config.Deps.rxJava)
+    implementation(Config.Deps.compressor)
+    implementation(Config.Deps.kotlinCoroutinesRx2)
 
 }
 

@@ -3,20 +3,22 @@ package com.lomovskiy.lib.imagepicker.sample
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import com.lomovskiy.lib.imagepicker.GalleryImagePicker
-import com.lomovskiy.lib.imagepicker.ImagePicker
-import com.lomovskiy.lib.imagepicker.launchForImage
+import com.lomovskiy.lib.imagepicker.PickImageFromGallery
 import java.io.File
 import java.util.*
 
+inline fun ActivityResultLauncher<*>.launch() {
+    launch(null)
+}
+
 class MainActivity : AppCompatActivity() {
 
-    private val imagePicker = GalleryImagePicker()
+    private val launcher = registerForActivityResult(PickImageFromGallery) {
 
-    private val launcher = imagePicker.createLauncher(this)
+    }
 
     private lateinit var buttonCamera: Button
     private lateinit var buttonGallery: Button
@@ -35,11 +37,14 @@ class MainActivity : AppCompatActivity() {
                 "${packageName}.imagepicker.fileprovider",
                 file
             )
-//            getFromCameraLauncher.launch(uri)
         }
         buttonGallery.setOnClickListener {
-            launcher.launchForImage()
+            launcher.launch()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }

@@ -31,8 +31,11 @@ object Config {
         const val buildTools = "30.0.3"
 
         const val kotlin = "1.4.30"
+        const val kotlinCoroutinesRx2: String = "1.4.3"
 
         const val ui = "1.0.8"
+        const val rxJava: String = "2.2.9"
+        const val compressor: String = "3.0.1"
 
     }
 
@@ -46,7 +49,10 @@ object Config {
     object Deps {
 
         const val kotlinStd = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+        const val kotlinCoroutinesRx2: String = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:${Versions.kotlinCoroutinesRx2}"
         const val ui = "com.github.lomovskiy:android-lib-ui:${Versions.ui}"
+        const val rxJava: String = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
+        const val compressor: String = "id.zelory:compressor:${Versions.compressor}"
 
     }
 

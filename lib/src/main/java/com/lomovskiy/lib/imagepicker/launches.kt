@@ -1,15 +1,23 @@
 package com.lomovskiy.lib.imagepicker
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.ActivityResultCaller
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContract
 
-inline fun ActivityResultLauncher<String>.launchForImage() {
-    launch("image/*")
+private val galleryIntent: Intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+    addCategory(Intent.CATEGORY_OPENABLE)
+    type = "image/*"
 }
 
-inline fun ActivityResultCaller.getGalleryImageLauncher(callback: ActivityResultCallback<Uri>): ActivityResultLauncher<String> {
-    return registerForActivityResult(ActivityResultContracts.GetContent(), callback)
+object PickImageFromGallery : ActivityResultContract<Void, Uri?>() {
+
+    override fun createIntent(context: Context, input: Void?): Intent {
+        return galleryIntent
+    }
+
+    override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
+        return intent?.data
+    }
+
 }
