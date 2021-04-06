@@ -6,7 +6,10 @@ import android.widget.Button
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import com.lomovskiy.lib.imagepicker.PickImageFromGallery
+import androidx.lifecycle.lifecycleScope
+import com.lomovskiy.lib.imagepicker.PickImageFromGalleryContract
+import com.lomovskiy.lib.ui.showToast
+import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 
@@ -16,14 +19,19 @@ inline fun ActivityResultLauncher<*>.launch() {
 
 class MainActivity : AppCompatActivity() {
 
-    private val launcher = registerForActivityResult(PickImageFromGallery) {
-
-    }
-
     private lateinit var buttonCamera: Button
     private lateinit var buttonGallery: Button
 
     private var uri: Uri? = null
+
+    private val launcher = registerForActivityResult(PickImageFromGalleryContract) {
+        lifecycleScope.launch {
+            if (it != null) {
+                val file = AppLoader.imagePicker.handleResult(it)
+                showToast(file.absolutePath)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

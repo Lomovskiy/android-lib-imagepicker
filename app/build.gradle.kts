@@ -8,6 +8,7 @@ plugins {
 android {
 
     defaultConfig {
+        multiDexEnabled = true
         applicationId("com.lomovskiy.lib.imagepicker.sample")
         minSdkVersion(Config.Versions.Android.min)
         targetSdkVersion(Config.Versions.Android.target)
@@ -30,4 +31,5 @@ dependencies {
     implementation(Config.Deps.kotlinStd)
     implementation(Config.Deps.ui)
     implementation(project(Config.Modules.lib))
+    implementation("androidx.multidex:multidex:2.0.1")
 }
