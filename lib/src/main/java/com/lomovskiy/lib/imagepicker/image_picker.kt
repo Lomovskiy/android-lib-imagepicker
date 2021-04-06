@@ -2,12 +2,7 @@ package com.lomovskiy.lib.imagepicker
 
 import android.content.Context
 import android.net.Uri
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import androidx.fragment.app.Fragment
-import io.reactivex.Completable
-import io.reactivex.Maybe
 import io.reactivex.Single
 import java.io.File
 import java.util.*

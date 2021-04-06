@@ -6,8 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.annotation.CallSuper
-import java.io.File
 
 object PickImageFromGalleryContract : ActivityResultContract<Void, Uri?>() {
 

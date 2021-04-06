@@ -1,3 +1,3 @@
 include(":lib")
 include(":app")
-rootProject.name = "image-picker"
+rootProject.name = "android-lib-image-picker"

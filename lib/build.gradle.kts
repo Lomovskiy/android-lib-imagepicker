@@ -52,8 +52,8 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                groupId = com.lomovskiy.lib.imagepicker.buildsrc.Config.Publish.groupId
-                artifactId = com.lomovskiy.lib.imagepicker.buildsrc.Config.Publish.artifactId
+                groupId = Config.Publish.groupId
+                artifactId = Config.Publish.artifactId
                 version = Config.Versions.name
             }
         }

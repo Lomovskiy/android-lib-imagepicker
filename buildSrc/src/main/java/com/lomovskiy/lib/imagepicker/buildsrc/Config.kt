@@ -4,7 +4,7 @@ object Config {
 
     object Publish {
         const val groupId = "com.lomovskiy.lib"
-        const val artifactId = "template"
+        const val artifactId = "image-picker"
     }
 
     object GradlePlugins {
