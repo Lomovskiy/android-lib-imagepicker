@@ -34,7 +34,7 @@ class ImagePickerImpl(
             if (compressor == null) {
                 photoFile.writeBytes(tmpFile.readBytes())
             } else {
-                compressor.compressCompletable(tmpFile, photoFile).blockingAwait()
+//                compressor.compressCompletable(tmpFile, photoFile).blockingAwait()
             }
             return@fromCallable photoFile
         }
@@ -48,7 +48,7 @@ class ImagePickerImpl(
         if (compressor == null) {
             photoFile.writeBytes(tmpFile.readBytes())
         } else {
-            compressor.compress(tmpFile, photoFile)
+//            compressor.compress(tmpFile, photoFile)
         }
         tmpFile.delete()
         context.cacheDir.deleteRecursively()

@@ -1,14 +1,14 @@
 package com.lomovskiy.lib.imagepicker.sample
 
-import android.net.Uri
+import android.Manifest
 import android.os.Bundle
 import android.widget.Button
-import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.lomovskiy.lib.imagepicker.ImageCompressor
 import com.lomovskiy.lib.imagepicker.PickImageFromCameraContract
 import com.lomovskiy.lib.imagepicker.PickImageFromGalleryContract
-import com.lomovskiy.lib.ui.showToast
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -16,13 +16,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonCamera: Button
     private lateinit var buttonGallery: Button
 
-    private var uri: Uri? = null
+    private val imageCompressor: ImageCompressor = AppLoader.imageCompressor
+
+    private val permissionsLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+
+    }
 
     private val galleryLauncher = registerForActivityResult(PickImageFromGalleryContract) {
         lifecycleScope.launch {
             if (it != null) {
-                val file = AppLoader.imagePicker.handleResult(it)
-                showToast(file.absolutePath)
+                val str = imageCompressor.compressToBase64(it)
+                print(str)
             }
         }
     }
@@ -30,8 +34,8 @@ class MainActivity : AppCompatActivity() {
     private val cameraLauncher = registerForActivityResult(PickImageFromCameraContract) {
         lifecycleScope.launch {
             if (it != null) {
-                val file = AppLoader.imagePicker.handleResult(it)
-                showToast(file.absolutePath)
+                val str = imageCompressor.compressToBase64(it)
+                print(str)
             }
         }
     }
@@ -39,10 +43,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        permissionsLauncher.launch(arrayOf(
+                Manifest.permission.CAMERA
+        ))
         buttonCamera = findViewById(R.id.button_camera)
         buttonGallery = findViewById(R.id.button_gallery)
         buttonCamera.setOnClickListener {
-            cameraLauncher.launch(AppLoader.imagePicker.getNewPhotoUri())
+            cameraLauncher.launch(imageCompressor.getNewPhotoUri())
         }
         buttonGallery.setOnClickListener {
             galleryLauncher.launch(null)
