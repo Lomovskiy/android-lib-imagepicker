@@ -14,15 +14,7 @@ import kotlin.math.max
 
 interface ImageCompressor {
 
-//    suspend fun compressToFile(source: File, dest: File)
-//
-//    suspend fun compressToFile(source: Uri, dest: File)
-
     suspend fun compressToBase64(source: File): String
-
-    suspend fun compressToBase64(source: Uri): String
-
-    fun getNewPhotoUri(): Uri
 
 }
 
@@ -33,36 +25,8 @@ class ImageCompressorImpl(
     private val maxSize: Long
 ) : ImageCompressor {
 
-    private val authority: String = "${context.packageName}.imagepicker.fileprovider"
-
-//    override suspend fun compressToFile(source: File, dest: File) {
-//        Compressor.compress(context, source) {
-//            default(width = maxWidth, height = maxHeight)
-//            size(maxSize)
-//            destination(dest)
-//        }
-//    }
-//
-//    override suspend fun compressToFile(source: Uri, dest: File) {
-//        val tmpFile = getNewTempFile()
-//        tmpFile.writeBytes(context.contentResolver.openInputStream(source)!!.readBytes())
-//        compressToFile(tmpFile, dest)
-//        tmpFile.delete()
-//    }
-
     override suspend fun compressToBase64(source: File): String {
         return compressToBase64(source, 100)
-    }
-
-    override suspend fun compressToBase64(source: Uri): String {
-        val tmpFile = getNewTempFile()
-        tmpFile.writeBytes(context.contentResolver.openInputStream(source)!!.readBytes())
-        val result = compressToBase64(tmpFile)
-        return result
-    }
-
-    override fun getNewPhotoUri(): Uri {
-        return FileProvider.getUriForFile(context, authority, getNewTempFile())
     }
 
     private suspend fun compressToBase64(source: File, quality: Int): String {
@@ -73,16 +37,7 @@ class ImageCompressorImpl(
         if (maxSize < str.length) {
             return compressToBase64(source, quality - 10)
         }
-        context.cacheDir.deleteRecursively()
         return str
-    }
-
-    private fun getNewTempFile(): File {
-        return File("${context.cacheDir}/${UUID.randomUUID()}.jpg")
-    }
-
-    private fun getNewPhotoFile(): File {
-        return File("${context.filesDir}/${UUID.randomUUID()}.jpg")
     }
 
 }

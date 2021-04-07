@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.lomovskiy.lib.imagepicker.ImageCompressor
 import com.lomovskiy.lib.imagepicker.PickImageFromCameraContract
 import com.lomovskiy.lib.imagepicker.PickImageFromGalleryContract
+import com.lomovskiy.lib.ui.showToast
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             if (it != null) {
                 val str = imageCompressor.compressToBase64(it)
-                print(str)
+                showToast(str.length.toString())
             }
         }
     }
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             if (it != null) {
                 val str = imageCompressor.compressToBase64(it)
-                print(str)
+                showToast(str.length.toString())
             }
         }
     }
