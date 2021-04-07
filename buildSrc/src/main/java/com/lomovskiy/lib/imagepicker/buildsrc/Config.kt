@@ -35,7 +35,7 @@ object Config {
 
         const val ui = "1.0.8"
         const val rxJava: String = "2.2.9"
-        const val compressor: String = "3.0.1"
+        const val compressor: String = "2.1.1"
 
     }
 
