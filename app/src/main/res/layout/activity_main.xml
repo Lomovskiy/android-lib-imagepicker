@@ -21,4 +21,18 @@
         android:text="get from gallery"
         />
 
+    <Button
+        android:id="@+id/button_read_latest_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="read latest image"
+        />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        />
+
 </LinearLayout>
