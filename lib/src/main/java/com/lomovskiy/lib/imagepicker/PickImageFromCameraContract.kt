@@ -7,23 +7,6 @@ import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContract
 
-object PickImageFromGalleryContract : ActivityResultContract<Void, Uri?>() {
-
-    private val intent: Intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-        addCategory(Intent.CATEGORY_OPENABLE)
-        type = "image/*"
-    }
-
-    override fun createIntent(context: Context, input: Void?): Intent {
-        return intent
-    }
-
-    override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
-        return intent?.data
-    }
-
-}
-
 object PickImageFromCameraContract : ActivityResultContract<Uri?, Uri?>() {
 
     private var fileUri: Uri? = null

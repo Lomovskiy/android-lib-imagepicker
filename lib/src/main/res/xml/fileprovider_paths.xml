@@ -5,4 +5,9 @@
         path="."
         />
 
+    <root-path
+        name="no_backup"
+        path="."
+        />
+
 </paths>
