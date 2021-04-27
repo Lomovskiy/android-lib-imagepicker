@@ -1,6 +1,7 @@
 package com.lomovskiy.lib.imagepicker
 
 import android.app.Activity
+import android.app.usage.ExternalStorageStats
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -30,7 +31,7 @@ object PickImageFromCameraContract : ActivityResultContract<Void?, Uri?>() {
     }
 
     private fun createPhotoUri(context: Context): Uri {
-        val file = File("${ContextCompat.getNoBackupFilesDir(context)}/${UUID.randomUUID()}.jpg")
+        val file = File("${ContextCompat.getExternalFilesDirs(context, )}/${UUID.randomUUID()}.jpg")
         return FileProvider.getUriForFile(context, "${context.packageName}.imagepicker.fileprovider", file)
     }
 
