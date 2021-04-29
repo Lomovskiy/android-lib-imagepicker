@@ -20,12 +20,6 @@ import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-
-        const val TAG = "MainActivity"
-
-    }
-
     private lateinit var buttonCamera: Button
     private lateinit var buttonGallery: Button
     private lateinit var buttonReadLatestImage: Button
