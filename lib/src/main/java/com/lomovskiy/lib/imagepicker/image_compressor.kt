@@ -20,7 +20,8 @@ class ImageCompressorImpl(
     private val context: Context,
     private val maxWidth: Int,
     private val maxHeight: Int,
-    private val maxSize: Long
+    private val maxSize: Long,
+    private val downgradeQualityStep: Int = 10
 ) : ImageCompressor {
 
     private val compressorInt = Compressor(context).apply {
@@ -42,10 +43,11 @@ class ImageCompressorImpl(
         compressorInt.setQuality(quality)
         val compressed = compressorInt.compressToFile(source)
         val str = Base64.encodeToString(compressed.readBytes(), Base64.DEFAULT)
-        if (maxSize < str.length) {
-            return compressToBase64(source, quality - 10)
+        compressed.delete()
+        if (str.length <= maxSize || quality - downgradeQualityStep < 0) {
+            return str
         }
-        return str
+        return compressToBase64(source, quality - downgradeQualityStep)
     }
 
 }

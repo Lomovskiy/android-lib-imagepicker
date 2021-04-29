@@ -1,7 +1,7 @@
 <paths>
 
-    <cache-path
-        name="cache"
+    <root-path
+        name="no_backup"
         path="."
         />
 
